@@ -30,12 +30,8 @@ describe('App', () => {
 
   function createApp(initialCodes: unknown[] = []) {
     const fixture = TestBed.createComponent(App);
-    const component = fixture.componentInstance as unknown as {
-      loadCodes(): void;
-    };
 
     fixture.detectChanges();
-    component.loadCodes();
     httpMock.expectOne(apiUrl).flush(initialCodes);
     fixture.detectChanges();
 

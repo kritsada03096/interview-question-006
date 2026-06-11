@@ -17,10 +17,10 @@ RUN dotnet publish backend/Example.Api/Example.Api.csproj -c Release -o /app/pub
 # Runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
-ENV ASPNETCORE_URLS=http://+:8080
+ENV ASPNETCORE_URLS=http://0.0.0.0:10000
 ENV ASPNETCORE_ENVIRONMENT=Production
 ENV ConnectionStrings__DefaultConnection="Data Source=/data/product-codes.db"
-EXPOSE 8080
+EXPOSE 10000
 
 COPY --from=backend-build /app/publish ./
 COPY --from=frontend-build /src/frontend/example-web/dist/example-web/browser ./wwwroot
