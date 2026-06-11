@@ -38,7 +38,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseCors("Frontend");
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 app.MapProductCodeEndpoints();
+app.MapFallbackToFile("index.html");
 
 app.Run();

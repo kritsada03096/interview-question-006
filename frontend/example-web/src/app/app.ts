@@ -1,6 +1,6 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit, computed, inject, signal } from '@angular/core';
+import { Component, OnInit, PLATFORM_ID, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 interface ProductCode {
@@ -63,7 +63,8 @@ const CODE39_PATTERNS: Record<string, string> = {
 })
 export class App implements OnInit {
   private readonly http = inject(HttpClient);
-  private readonly apiUrl = 'http://localhost:5137/api/product-codes';
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly apiUrl = '/api/product-codes';
   private toastTimer: ReturnType<typeof setTimeout> | null = null;
 
   protected readonly codes = signal<ProductCode[]>([]);
@@ -83,7 +84,9 @@ export class App implements OnInit {
   protected readonly previewSegments = computed(() => this.buildCode39(this.normalizedInput()));
 
   ngOnInit(): void {
-    this.loadCodes();
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadCodes();
+    }
   }
 
   protected loadCodes(): void {
