@@ -41,6 +41,7 @@ app.UseCors("Frontend");
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
+app.MapGet("/healthz", () => Results.Ok(new { status = "ok" }));
 app.MapProductCodeEndpoints();
 app.MapFallbackToFile("index.html");
 

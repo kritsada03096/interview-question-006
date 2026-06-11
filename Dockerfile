@@ -17,7 +17,6 @@ RUN dotnet publish backend/Example.Api/Example.Api.csproj -c Release -o /app/pub
 # Runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
-ENV ASPNETCORE_URLS=http://+:8080
 ENV ASPNETCORE_ENVIRONMENT=Production
 ENV ConnectionStrings__DefaultConnection="Data Source=/data/product-codes.db"
 EXPOSE 8080
@@ -27,4 +26,4 @@ COPY --from=frontend-build /src/frontend/example-web/dist/example-web/browser ./
 
 RUN mkdir -p /data
 
-ENTRYPOINT ["dotnet", "Example.Api.dll"]
+CMD ["sh", "-c", "dotnet Example.Api.dll --urls http://0.0.0.0:${PORT:-8080}"]

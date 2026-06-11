@@ -7,11 +7,5 @@ services:
     envVars:
       - key: ASPNETCORE_ENVIRONMENT
         value: Production
-      - key: ASPNETCORE_URLS
-        value: http://+:8080
       - key: ConnectionStrings__DefaultConnection
         value: Data Source=/data/product-codes.db
-    disk:
-      name: product-code-data
-      mountPath: /data
-      sizeGB: 1

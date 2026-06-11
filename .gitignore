@@ -5,6 +5,9 @@ frontend-web*.log
 **/obj/
 **/dist/
 **/node_modules/
+**/.angular/
+publish-check/
+publish-check*.log
 
 *.db
 *.db-shm
