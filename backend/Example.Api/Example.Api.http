@@ -1,0 +1,13 @@
+@Example.Api_HostAddress = http://localhost:5137
+
+GET {{Example.Api_HostAddress}}/api/product-codes
+Accept: application/json
+
+###
+
+POST {{Example.Api_HostAddress}}/api/product-codes
+Content-Type: application/json
+
+{
+  "code": "ABCD-1234-EFGH-5678"
+}
